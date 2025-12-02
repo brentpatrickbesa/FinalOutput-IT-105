@@ -1,0 +1,198 @@
+:root{
+  --panel-bg: #f1efe9;
+  --accent-green: #21532b;
+  --muted: #6b6b6b;
+  --cell-border: rgba(0,0,0,0.35);
+  --card-shadow: 0 6px 10px rgba(0,0,0,0.12);
+  --found-color: rgba(33,83,43,0.18);
+  --found-outline: rgba(33,83,43,0.45);
+  --select-color: rgba(23, 114, 65, 0.218);
+}
+
+*{box-sizing:border-box}
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  background: #fff;
+  color: #222;
+  display:flex;
+  justify-content:center;
+  padding: 24px;
+}
+
+.crest {
+    /* ... existing position/size CSS ... */
+    background: transparent; /* Changed from #fff to transparent */
+    box-shadow: none; /* Removed the shadow */
+    /* You can keep the 'width' and 'height' if you want a fixed size container */
+    width: 64px;
+    height: 64px;
+}
+.container {
+  max-width: 980px;
+  width: 100%;
+  background: linear-gradient(#fff,#faf9f7);
+  border-radius: 8px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  padding: 18px 28px 36px;
+  position: relative;
+  background-color: var(--panel-bg);
+}
+
+.top-bar {
+  position:absolute;
+  left:0; right:0; top:0;
+  height:36px;
+  background: linear-gradient(90deg,#097436,#097436);
+  border-top-left-radius:8px;
+  border-top-right-radius:8px;
+}
+
+header {
+  text-align: center;
+  padding-top: 50px;
+  padding-bottom: 12px;
+  position: relative;
+}
+
+.title-row {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap: 18px;
+}
+
+.magnifier {
+  width:72px; height:72px;
+  display:flex; align-items:center; justify-content:center;
+  margin-right: -12px;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,0.15));
+}
+
+.title {
+  font-size:54px;
+  line-height:0.86;
+  color: var(--accent-green);
+  font-family: "Playfair Display", Georgia, serif;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+.subtitle {
+  margin-top: -2px;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size:20px;
+  color: var(--accent-green);
+  letter-spacing: 2px;
+}
+
+.crest { position:absolute; right:18px; top:35px; width:100px; height:100px; border-radius:50%; background:#ebebeb; display:flex; align-items:center; justify-content:center; box-shadow: 0 2px 6px rgba(20, 58, 196, 0.12); }
+
+.main { display:flex; gap: 28px; align-items:flex-start; justify-content:center; margin-top: 6px; flex-wrap:wrap; }
+
+.grid-wrap { display:flex; flex-direction:column; align-items:center; width:100%; }
+
+.scoreboard { display:flex; gap:22px; align-items:center; font-weight:700; margin-bottom:10px; color:var(--muted); }
+
+.grid {
+  display:grid;
+  grid-template-columns: repeat(12, 46px);
+  grid-auto-rows: 46px;
+  gap: 6px;
+  background: transparent;
+  user-select: none;
+  touch-action: none;
+  padding: 12px;
+  transition: transform .18s ease;
+  margin-bottom: 12px;
+}
+
+.cell {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background: white;
+  border-radius: 6px;
+  font-weight:700;
+  font-size:18px;
+  border: 1px solid var(--cell-border);
+  width:46px;
+  height:46px;
+  box-shadow: inset 0 -2px 0 rgba(0,0,0,0.02);
+  position: relative;
+  transition: transform .12s ease, background-color .18s ease, box-shadow .18s ease;
+}
+
+.cell::after{
+  content: "";
+  position:absolute;
+  inset:0;
+  border-radius:6px;
+  pointer-events:none;
+}
+
+.cell.selected {
+  background: var(--select-color);
+  transform: scale(1.03);
+  z-index: 2;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.08);
+}
+
+.cell.found {
+  background: linear-gradient(180deg, rgba(2, 104, 34, 0.3), var(--found-color));
+  border: 1px solid var(--found-outline);
+  color: #06631d;
+  transform: scale(1.04);
+  box-shadow: 0 10px 26px rgba(47, 162, 70, 0.08);
+  transition: transform .22s cubic-bezier(.2,.8,.2,1), box-shadow .25s ease;
+}
+
+/* small glow animation for found */
+.cell.found { animation: pop .28s ease; }
+@keyframes pop {
+  from { transform: scale(.92); opacity:0.7; }
+  to { transform: scale(1.04); opacity:1; }
+}
+
+.word-cards { display:flex; gap: 14px; margin-top: 8px; justify-content:center; flex-wrap:wrap; }
+
+.card {
+  width:160px;
+  min-height:90px;
+  background: #fff;
+  border-radius: 6px;
+  box-shadow: var(--card-shadow);
+  padding: 12px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-transform: uppercase;
+  font-weight:700;
+  letter-spacing: 0.6px;
+  color: #222;
+}
+
+.card.found { color: #045213; text-decoration: line-through; opacity: 0.85; }
+
+.controls { display:flex; gap: 10px; margin-top: 8px; justify-content:center; align-items:center; flex-wrap:wrap; }
+
+button { padding: 8px 14px; border-radius: 8px; border: 0; font-weight:700; cursor:pointer; box-shadow: 0 6px 10px rgba(0,0,0,0.08); }
+
+.btn-primary { background: var(--accent-green); color: #fff; }
+.btn-secondary { background: #fff; color: var(--accent-green); border: 1px solid rgba(0,0,0,0.08); }
+
+.counter { margin-left: 8px; color: var(--muted); font-weight:600; }
+
+.modal { position: fixed; left:0; right:0; top:0; bottom:0; display:none; align-items:center; justify-content:center; background: rgba(0,0,0,0.35); z-index:2000; }
+.modal.show { display:flex; }
+.modal-content { background: #fff; padding: 20px 28px; border-radius: 10px; text-align:center; box-shadow: 0 12px 40px rgba(0,0,0,0.25); font-weight:700; }
+
+@media (max-width: 860px){
+  .grid { transform: scale(0.9); transform-origin: top center; }
+  .title { font-size:44px; }
+}
+@media (max-width: 680px){
+  .grid { transform: scale(0.78); }
+  .card { width: 140px; }
+  .title { font-size:36px; }
+}
